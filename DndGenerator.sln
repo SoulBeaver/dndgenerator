@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DndGenerator", "DndGenerator\DndGenerator.fsproj", "{C41204A0-1C0F-4EAB-A171-A80C7B29AF03}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DndGeneratorTests", "DndGeneratorTests\DndGeneratorTests.fsproj", "{B67F23D1-47EE-4A9F-9C45-629FD652EE6B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C41204A0-1C0F-4EAB-A171-A80C7B29AF03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C41204A0-1C0F-4EAB-A171-A80C7B29AF03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C41204A0-1C0F-4EAB-A171-A80C7B29AF03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C41204A0-1C0F-4EAB-A171-A80C7B29AF03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B67F23D1-47EE-4A9F-9C45-629FD652EE6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B67F23D1-47EE-4A9F-9C45-629FD652EE6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B67F23D1-47EE-4A9F-9C45-629FD652EE6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B67F23D1-47EE-4A9F-9C45-629FD652EE6B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
