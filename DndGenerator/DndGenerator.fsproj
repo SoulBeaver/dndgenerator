@@ -59,6 +59,7 @@
     <Content Include="packages.config" />
     <Compile Include="EncounterOptions.fs" />
     <Compile Include="CommandLineParser.fs" />
+    <Compile Include="EncounterGenerator.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>

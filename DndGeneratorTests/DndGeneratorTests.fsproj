@@ -55,6 +55,7 @@
     <Content Include="packages.config" />
     <Compile Include="EncounterOptionsTest.fs" />
     <Compile Include="CommandLineParserTest.fs" />
+    <Compile Include="EncounterGeneratorTest.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Core">

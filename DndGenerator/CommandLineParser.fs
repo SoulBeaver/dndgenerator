@@ -27,7 +27,7 @@ let parseTopLevel arg miscSoFar =
         { misc = newMiscSoFar; parseMode = TopLevel; generatorType = Unknown }
 
     | "/e" -> 
-        { misc = miscSoFar; parseMode = Encounter; generatorType = E { difficulty = Medium; heroes = [] } }
+        { misc = miscSoFar; parseMode = Encounter; generatorType = E { difficulty = DifficultyOption.Medium; heroes = [] } }
     
     | x ->
         { misc = miscSoFar; parseMode = Error; generatorType = Unknown }

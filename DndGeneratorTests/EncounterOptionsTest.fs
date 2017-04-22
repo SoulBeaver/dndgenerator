@@ -48,7 +48,7 @@ module ``EncounterOptions - Command line arguments for building an encounter`` =
             | Difficulty x -> Some x
             | x -> None
         
-        parsed |> Option.get |> should equal Easy
+        parsed |> Option.get |> should equal DifficultyOption.Easy
 
     [<Test>]
     let ``Parsing difficulty is case insensitive`` () =
@@ -59,4 +59,4 @@ module ``EncounterOptions - Command line arguments for building an encounter`` =
             | Difficulty x -> Some x
             | x -> None
         
-        parsed |> Option.get |> should equal Easy
+        parsed |> Option.get |> should equal DifficultyOption.Easy

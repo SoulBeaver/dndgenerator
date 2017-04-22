@@ -1,6 +1,6 @@
 ﻿module DndGenerator.EncounterOptions
-    
-type DifficultyOption = Easy | Medium | Hard | Deadly
+
+type DifficultyOption = Easy = 0 | Medium = 1 | Hard = 2 | Deadly = 3
 
 type EncounterOptions = {
     difficulty: DifficultyOption
@@ -12,17 +12,17 @@ let (|Level|_|) (str: string) =
     
     if System.Int32.TryParse(str, &intValue)
         then match intValue with
-             | x when x < 0 -> None
+             | x when x < 1 -> None
              | x when x > 20 -> None
              | x -> Some x
         else None
 
 let (|Difficulty|_|) (str: string) =
     match str with
-    | "e" | "E" -> Some(Easy)
-    | "m" | "M" -> Some(Medium)
-    | "h" | "H" -> Some(Hard)
-    | "d" | "D" -> Some(Deadly)
+    | "e" | "E" -> Some(DifficultyOption.Easy)
+    | "m" | "M" -> Some(DifficultyOption.Medium)
+    | "h" | "H" -> Some(DifficultyOption.Hard)
+    | "d" | "D" -> Some(DifficultyOption.Deadly)
     | x -> None
 
 let isComplete (options:EncounterOptions) =

@@ -28,7 +28,7 @@ module ``CommandLineParser - Parses command-line arguments`` =
 
         match generatorType with
         | E(encounter) ->
-            encounter.difficulty |> should equal Easy
+            encounter.difficulty |> should equal DifficultyOption.Easy
             encounter.heroes |> should equal [1]
     
     [<Test>]
@@ -42,7 +42,7 @@ module ``CommandLineParser - Parses command-line arguments`` =
 
         match generatorType with
         | E(encounter) ->
-            encounter.difficulty |> should equal Hard
+            encounter.difficulty |> should equal DifficultyOption.Hard
             encounter.heroes |> should equal [4; 4; 5; 4]
     
     [<Test>]
@@ -63,7 +63,7 @@ module ``CommandLineParser - Parses command-line arguments`` =
 
         match generatorType with
         | E(encounter) ->
-            encounter.difficulty |> should equal Medium
+            encounter.difficulty |> should equal DifficultyOption.Medium
             encounter.heroes |> should equal [1; 1; 1]
         
     [<Test>]
@@ -94,5 +94,5 @@ module ``CommandLineParser - Parses command-line arguments`` =
 
         match generatorType with
         | E(encounter) ->
-            encounter.difficulty |> should equal Deadly
+            encounter.difficulty |> should equal DifficultyOption.Deadly
             encounter.heroes |> should equal [2]

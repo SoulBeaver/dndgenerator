@@ -19,12 +19,23 @@ module DndGenerator.Program
 open System
 
 open DndGenerator.CommandLineParser
+open DndGenerator.EncounterGenerator
 
 [<EntryPoint>]
 let main argv =    
     let options = [|"/e";"e";"1";"1";"1";"1"|] |> Array.toList |> parseCommandLine
 
-    printfn "%A" options
+    let isVerboseRequested = options.misc.verbose = VerboseOutput
+
+    match options with
+    | { parseMode = Encounter; generatorType = E(encounterOptions) } ->
+        generateEncounter encounterOptions isVerboseRequested |> ignore
+    
+    | { parseMode = Error } ->
+        printfn "Cannot parse with args %A" argv |> ignore
+    
+    | _ -> 
+        printfn "Currently unsupported args %A" argv |> ignore
 
     Console.Read()
     0 // return an integer exit code
