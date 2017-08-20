@@ -57,6 +57,12 @@
     <Compile Include="AssemblyInfo.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />
+    <Compile Include="Extensions.fs" />
+    <Compile Include="UnitsOfMeasure.fs" />
+    <Compile Include="EncounterDifficultyByLevel.fs" />
+    <Compile Include="ExperiencePerCR.fs" />
+    <Compile Include="DomainTypes.fs" />
+    <Compile Include="Monster.fs" />
     <Compile Include="EncounterOptions.fs" />
     <Compile Include="CommandLineParser.fs" />
     <Compile Include="EncounterGenerator.fs" />

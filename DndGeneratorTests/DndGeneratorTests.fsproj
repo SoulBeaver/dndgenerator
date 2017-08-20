@@ -56,6 +56,8 @@
     <Compile Include="EncounterOptionsTest.fs" />
     <Compile Include="CommandLineParserTest.fs" />
     <Compile Include="EncounterGeneratorTest.fs" />
+    <Compile Include="DomainTypesTest.fs" />
+    <Compile Include="MonsterTest.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Core">
