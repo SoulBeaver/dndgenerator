@@ -1,6 +1,7 @@
 module DndGenerator.Monster
 
 open System.Globalization
+open FSharp.Data
 
 open UnitsOfMeasure
 open ExperiencePerCR
@@ -9,30 +10,36 @@ open DomainTypes
 open DomainTypes.Type
 open DomainTypes.Alignment
 
+type MonsterCsvProvider = CsvProvider<"assets/monsters.csv">
+
 let CreateMonster name cr offensiveStats creatureStats =
     let experienceValue = ExperiencePerCr.[cr]
 
-    { name=name; cr={ rating=cr; reward=experienceValue }; offensiveStats=(Some offensiveStats); creatureStats=(Some creatureStats) }
+    { name=name; cr={ rating=cr; reward=experienceValue }; offensiveStats=offensiveStats; creatureStats=creatureStats }
 
-let CreateMonsterBase name cr =
-    let experienceValue = ExperiencePerCr.[cr]
+let parseMonster (row: CsvProvider<"assets/monsters.csv">.Row)  =
+    let environmentList = row.Environment
+    let tagsList = row.Tags
 
-    { name=name; cr={ rating=cr; reward=experienceValue }; offensiveStats=None; creatureStats=None }
+    let offensiveStats = { 
+        ac=row.Ac; 
+        hp=row.Hp; 
+        initiative=row.Init 
+    }
 
-let assembleMonster tokens =
-    match tokens with
-    | [|_;_;name;cr;(Size size);(Type ``type``);tags;_;(Alignment alignment);environment;ac;hp;init;sources|]
-    | [|_;_;name;cr;(Size size);(Type ``type``);tags;_;(Alignment alignment);environment;ac;hp;init;_;sources|]
-    | [|_;_;name;cr;(Size size);(Type ``type``);tags;_;(Alignment alignment);environment;ac;hp;init;_;_;sources|]
-    | [|_;_;name;cr;(Size size);(Type ``type``);tags;_;(Alignment alignment);environment;ac;hp;init;_;_;_;sources|] ->
-        CreateMonster name cr { ac=(int ac); hp=(int hp); initiative=(int init) } { size=size; ``type``=``type``; alignment=alignment; tags = []; environment=[] }
-    | _ -> raise (System.ArgumentException "Tokens did not conform to any expected permutaytion.")
+    let creatureStats = { 
+        size=Size.Parse <| row.Size; 
+        ``type``=Type.Parse <| row.Type; 
+        alignment=Alignment.Parse <| row.Alignment; 
+        tags = []; 
+        environment=[] 
+    }
 
-let LoadMonstersFromFile tsvFile =
-    let contents = 
-        System.IO.File.ReadAllLines tsvFile
-        |> Seq.skip 1
-        |> Seq.map (fun entry -> entry.Split('\t'))
-        |> Seq.map assembleMonster
-    
-    contents
+    CreateMonster row.Name row.Cr offensiveStats creatureStats
+
+let LoadMonstersFromCsv csv =
+    use monsterCsvReader = System.IO.File.OpenText(csv)
+
+    let monsterCsv = MonsterCsvProvider.Load(monsterCsvReader)
+
+    monsterCsv.Rows |> Seq.map parseMonster

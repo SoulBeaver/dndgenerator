@@ -1,5 +1,6 @@
 ﻿namespace DndGeneratorTests
 
+(*
 module ``EncounterOptions - Command line arguments for building an encounter`` =
     open NUnit.Framework
     open FsUnit
@@ -60,3 +61,4 @@ module ``EncounterOptions - Command line arguments for building an encounter`` =
             | x -> None
         
         parsed |> Option.get |> should equal DifficultyOption.Easy
+        *)

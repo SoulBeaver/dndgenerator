@@ -1,5 +1,6 @@
 ﻿namespace DndGeneratorTests
 
+(*
 module ``CommandLineParser - Parses command-line arguments`` =
     open NUnit.Framework
     open FsUnit
@@ -96,3 +97,4 @@ module ``CommandLineParser - Parses command-line arguments`` =
         | E(encounter) ->
             encounter.difficulty |> should equal DifficultyOption.Deadly
             encounter.heroes |> should equal [2]
+            *)

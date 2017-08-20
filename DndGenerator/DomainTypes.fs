@@ -16,7 +16,7 @@ module DomainTypes =
     module Size =
         type T = Tiny | Small | Medium | Large | Huge | Gargantuan
 
-        let (|Size|_|) (str: string) =
+        let TryParse (str:string) =
             let lowerCase = str.ToLower CultureInfo.CurrentCulture
             
             match lowerCase with
@@ -28,11 +28,15 @@ module DomainTypes =
             | "gargantuan" -> Some Gargantuan
             | _ -> None
 
+        let Parse = TryParse >> Option.get
+
+        let (|Size|_|) = TryParse
+
     [<AutoOpen>]
     module Type =
         type T = Aberration | Beast | Celestial | Construct | Dragon | Elemental | Fey | Fiend | Giant | Humanoid | Monstrosity | Ooze | Plant | Undead
 
-        let (|Type|_|) (str: string) =
+        let TryParse (str:string) =
             let lowerCase = str.ToLower CultureInfo.CurrentCulture
     
             match lowerCase with
@@ -52,11 +56,15 @@ module DomainTypes =
             | "undead" -> Some Undead
             | _ -> None
 
+        let Parse = TryParse >> Option.get
+
+        let (|Type|_|) = TryParse
+
     [<AutoOpen>]
     module Alignment =
         type T = LawfulGood | LawfulNeutral | LawfulEvil | NeutralGood | Neutral | NeutralEvil | ChaoticGood | ChaoticNeutral | ChaoticEvil | Unaligned
 
-        let (|Alignment|_|) (str: string) =
+        let TryParse (str:string) =
             let lowerCase = str.ToLower CultureInfo.CurrentCulture
     
             match lowerCase with
@@ -71,11 +79,16 @@ module DomainTypes =
             | "chaotic evil" -> Some ChaoticEvil
             | _ -> None
 
+        let Parse = TryParse >> Option.get
+
+        let (|Alignment|_|) = TryParse
+            
+
     [<AutoOpen>]
     module Environment =
         type T = Aquatic | Arctic | Cave | Coast | Desert | Dungeon | Forest | Grassland | Mountain | Planar | Ruins | Swamp | Underground | Urban
     
-        let (|Environment|_|) (str: string) =
+        let TryParse (str:string) =
             let lowerCase = str.ToLower CultureInfo.CurrentCulture
     
             match lowerCase with
@@ -94,6 +107,11 @@ module DomainTypes =
             | "underground" -> Some Underground
             | "urban" -> Some Urban
             | _ -> None
+
+        let Parse = TryParse >> Option.get
+
+        let (|Environment|_|) = TryParse
+            
 
     type Dice = D3 | D4 | D6 | D8 | D10 | D12 | D20 | D100
 
@@ -117,7 +135,7 @@ module DomainTypes =
         let value e = apply id e
 
     type OffensiveStats = {
-        ac: int
+        ac: string
         hp: int
         initiative: int
     }
@@ -134,6 +152,6 @@ module DomainTypes =
         name: string
         cr: CR
     
-        offensiveStats: OffensiveStats option
-        creatureStats: CreatureStats option
+        offensiveStats: OffensiveStats
+        creatureStats: CreatureStats
     }
