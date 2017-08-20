@@ -29,42 +29,26 @@ module ``Monster - Functionality for loading and creating a Monster`` =
                 Expect.equal manticore.offensiveStats { ac="14"; hp=68; initiative=3 } "manticore.offensiveStats"
                 Expect.equal manticore.creatureStats { size=Large; ``type``=Monstrosity; alignment=LawfulEvil; tags=[]; environment=[] } "manticore.creatureStats"
             }
+
+            test "Create a Githyanki Knight from a CSV row" {
+                let csvFile = Path.Combine(__SOURCE_DIRECTORY__, "assets/gith.csv")
+
+                let gith = LoadMonstersFromCsv csvFile |> Seq.exactlyOne
+
+                Expect.equal gith.name "Githyanki Knight" "gith.name"
+                Expect.equal gith.cr { rating="8"; reward=3900 } "gith.cr"
+                Expect.equal gith.offensiveStats { ac="18"; hp=91; initiative=2 } "gith.offensiveStats"
+                Expect.equal gith.creatureStats { size=Medium; ``type``=Humanoid; alignment=LawfulEvil; tags=[]; environment=[] } "gith.creatureStats"
+            }
+
+            test "Create a Kraken from a TSV-token-list" {
+                let csvFile = Path.Combine(__SOURCE_DIRECTORY__, "assets/kraken.csv")
+
+                let kraken = LoadMonstersFromCsv csvFile |> Seq.exactlyOne
+
+                Expect.equal kraken.name "Kraken" "kraken.name"
+                Expect.equal kraken.cr { rating="23"; reward=50000 } "kraken.cr"
+                Expect.equal kraken.offensiveStats { ac="18"; hp=472; initiative=0 } "kraken.offensiveStats"
+                Expect.equal kraken.creatureStats { size=Gargantuan; ``type``=Monstrosity; alignment=ChaoticEvil; tags=[]; environment=[] } "kraken.creatureStats"
+            }
         ]
-
-        
-
-    (*
-    [<Test>]
-    
-    
-    
-    [<Test>]
-    let ``Create a Githyanki Knight from a CSV row`` () =
-        let tokens = "54fd43f7-d101-461d-b6db-e64f095eed84,mm.githyanki-knight,Githyanki Knight,8,Medium,Humanoid,Gith,Gith,lawful evil,\"planar, swamp\",18,91,2,,,,Monster Manual: 160".Split(',')
-
-        let githyankiKnight = assembleMonster tokens
-
-        githyankiKnight.name |> should equal "Githyanki Knight"
-        githyankiKnight.cr |> should equal { rating="8"; reward=3900 }
-
-        githyankiKnight.offensiveStats
-        |> should equal { ac="18"; hp=91; initiative=2 }
-
-        githyankiKnight.creatureStats
-        |> should equal { size=Medium; ``type``=Humanoid; alignment=LawfulEvil; tags=[]; environment=[] }
-        
-    [<Test>]
-    let ``Create a Kraken from a TSV-token-list`` () =
-        let tokens = "db248a11-5c00-433b-91e5-606ac09a3df9	mm.kraken	Kraken	23	Gargantuan	Monstrosity	Titan	chaotic evil	aquatic, coast	18	472	0	lair	legendary	Monster Manual: 197".Split('\t')
-
-        let kraken = assembleMonster tokens
-
-        kraken.name |> should equal "Kraken"
-        kraken.cr |> should equal { rating="23"; reward=50000 }
-
-        kraken.offensiveStats
-        |> should equal { ac="18"; hp=472; initiative=0 }
-
-        kraken.creatureStats
-        |> should equal { size=Gargantuan; ``type``=Monstrosity; alignment=ChaoticEvil; tags=[]; environment=[] }
-        *)
