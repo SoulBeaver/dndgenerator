@@ -1,1 +1,9 @@
 source https://www.nuget.org/api/v2
+nuget Expecto
+nuget Expecto.BenchmarkDotNet
+nuget Expecto.FsCheck
+nuget Expecto.VisualStudio.TestAdapter
+nuget FSharp.Core 4.2.3 restriction: >= net452
+nuget FSharp.Data 2.3.3 restriction: >= net452
+nuget Paket 5.86.0 restriction: >= net452
+nuget System.ValueTuple 4.3.0 restriction: >= net452

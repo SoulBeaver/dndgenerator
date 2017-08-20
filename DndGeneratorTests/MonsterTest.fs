@@ -6,35 +6,36 @@ module ``Monster - Functionality for loading and creating a Monster`` =
     open DndGenerator.DomainTypes
     open DndGenerator.Monster
     
+    open Expecto
+
+    let tests =
+        testList "Testing a Monster" [
+            test "Creating a CR 1 Orc with cool stats" {
+                let orc = CreateMonster "Orc Eye of Gruumsh" "1" { ac="14"; hp=114; initiative=2 } { size=Medium; ``type``=Humanoid; alignment=ChaoticEvil; tags=[]; environment=[] }
+
+                Expect.equal orc.name "Orc Eye of Gruumsh" "orc.name"
+                Expect.equal orc.cr { rating="1"; reward=200 } "orc.cr"
+                Expect.equal orc.offensiveStats { ac="14"; hp=114; initiative=2 } "orc.offensiveStats"
+                Expect.equal orc.creatureStats { size=Medium; ``type``=Humanoid; alignment=ChaoticEvil; tags=[]; environment=[] } "orc.creatureStats"
+            }
+
+            test "Create a Manticore from a CSV file" {
+                let csvFile = Path.Combine(__SOURCE_DIRECTORY__, "assets/manticore.csv")
+
+                let manticore = LoadMonstersFromCsv csvFile |> Seq.exactlyOne
+
+                Expect.equal manticore.name "Manticore" "manticore.name"
+                Expect.equal manticore.cr { rating="3"; reward=700 } "manticore.cr"
+                Expect.equal manticore.offensiveStats { ac="14"; hp=68; initiative=3 } "manticore.offensiveStats"
+                Expect.equal manticore.creatureStats { size=Large; ``type``=Monstrosity; alignment=LawfulEvil; tags=[]; environment=[] } "manticore.creatureStats"
+            }
+        ]
+
+        
+
     (*
     [<Test>]
-    let ``Creating a CR 1 Orc with cool stats`` () =
-        let orc = CreateMonster "Orc Eye of Gruumsh" "1" { ac="14"; hp=114; initiative=2 } { size=Medium; ``type``=Humanoid; alignment=ChaoticEvil; tags=[]; environment=[] }
-
-        orc.name |> should equal "Orc Eye of Gruumsh"
-        orc.cr |> should equal { rating="1"; reward=200 }
-        
-        orc.offensiveStats
-        |> should equal { ac="14"; hp=114; initiative=2 }
-
-        orc.creatureStats
-        |> should equal { size=Medium; ``type``=Humanoid; alignment=ChaoticEvil; tags=[]; environment=[] }
-
     
-    [<Test>]
-    let ``Create a Manticore from a CSV file`` () =
-        let csvFile = Path.Combine(__SOURCE_DIRECTORY__, "assets/manticore.csv")
-
-        let manticore = LoadMonstersFromCsv csvFile |> Seq.exactlyOne
-
-        manticore.name |> should equal "Manticore"
-        manticore.cr |> should equal { rating="3"; reward=700 }
-
-        manticore.offensiveStats
-        |> should equal { ac="14"; hp=68; initiative=3 }
-
-        manticore.creatureStats
-        |> should equal { size=Large; ``type``=Monstrosity; alignment=LawfulEvil; tags=[]; environment=[] }
     
     
     [<Test>]

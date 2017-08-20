@@ -42,4 +42,6 @@ let LoadMonstersFromCsv csv =
 
     let monsterCsv = MonsterCsvProvider.Load(monsterCsvReader)
 
-    monsterCsv.Rows |> Seq.map parseMonster
+    monsterCsv.Rows 
+    |> Seq.map parseMonster 
+    |> Seq.toList

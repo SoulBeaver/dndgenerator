@@ -1,0 +1,6 @@
+FSharp.Core
+System.ValueTuple
+Expecto
+Expecto.BenchmarkDotNet
+Expecto.FsCheck
+Expecto.VisualStudio.TestAdapter
